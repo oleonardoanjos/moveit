@@ -1,0 +1,16 @@
+.buttonTheme {
+  position: fixed;
+  top: 20px;
+  right: 30px;
+  background: transparent;
+  cursor: pointer;
+}
+
+@media(max-width: 720px){
+  .buttonTheme {
+      top: auto;
+      bottom: 20px;
+      right: 10px;
+      z-index: 99999;
+  }
+}

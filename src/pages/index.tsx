@@ -1,5 +1,8 @@
 import Head from 'next/head';
 import { GetServerSideProps } from 'next';
+import { ChallengesProvider } from '../contexts/ChallengesContext';
+import { CountdownProvider } from '../contexts/CountdownContext';
+import { ButtonTheme } from '../components/ButtonTheme';
 import { ChallengeBox } from "../components/ChallengeBox";
 import { CompletedChallenges } from "../components/CompletedChallenges";
 import { Countdown } from "../components/Countdown";
@@ -12,6 +15,7 @@ interface HomeProps{
   level: number;
   currentExperience: number;
   challengesCompleted: number;
+  themeName: string;
 }
 
 export default function Home(props: HomeProps) {
@@ -20,6 +24,7 @@ export default function Home(props: HomeProps) {
       level={props.level}
       currentExperience={props.currentExperience}
       challengesCompleted={props.challengesCompleted}
+      themeName={props.themeName}
     >
       <div className={styles.container}>
         <Head>
@@ -41,21 +46,20 @@ export default function Home(props: HomeProps) {
           </section>
         </CountdownProvider>
       </div>
+      <ButtonTheme />
     </ChallengesProvider>
   );
 }
 
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
-  const { level, currentExperience, challengesCompleted } = ctx.req.cookies;
+  const { level, currentExperience, challengesCompleted, themeName } = ctx.req.cookies;
 
   return {
     props: {
-      level: Number(level),
-      currentExperience: Number(currentExperience),
-      challengesCompleted: Number(challengesCompleted)
+      level: Number(level ?? 1),
+      currentExperience: Number(currentExperience ?? 0),
+      challengesCompleted: Number(challengesCompleted ?? 0),
+      themeName: String(themeName ?? "light")
     }
   }
 }
-
-import { ChallengesProvider } from '../contexts/ChallengesContext';
-import { CountdownProvider } from '../contexts/CountdownContext';
