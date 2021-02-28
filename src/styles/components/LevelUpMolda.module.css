@@ -11,7 +11,7 @@
 }
 
 .levelUpModalContainer {
-  background: var(--white);
+  background: var(--bodyTheme);
   width: 100%;
   max-width: 400px;
   padding: 2rem 3rem;
