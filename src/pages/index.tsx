@@ -2,6 +2,7 @@ import Head from 'next/head';
 import { GetServerSideProps } from 'next';
 import { ChallengesProvider } from '../contexts/ChallengesContext';
 import { CountdownProvider } from '../contexts/CountdownContext';
+import { ThemeProvider } from '../contexts/ThemeContext';
 import { ButtonTheme } from '../components/ButtonTheme';
 import { ChallengeBox } from "../components/ChallengeBox";
 import { CompletedChallenges } from "../components/CompletedChallenges";
@@ -24,7 +25,6 @@ export default function Home(props: HomeProps) {
       level={props.level}
       currentExperience={props.currentExperience}
       challengesCompleted={props.challengesCompleted}
-      themeName={props.themeName}
     >
       <div className={styles.container}>
         <Head>
@@ -46,7 +46,11 @@ export default function Home(props: HomeProps) {
           </section>
         </CountdownProvider>
       </div>
-      <ButtonTheme />
+      <ThemeProvider
+        themeName={props.themeName}
+      >
+        <ButtonTheme />
+      </ThemeProvider>
     </ChallengesProvider>
   );
 }

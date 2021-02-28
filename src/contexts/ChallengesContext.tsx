@@ -2,7 +2,6 @@ import { createContext, ReactNode, useEffect, useState } from 'react';
 import Cookies from 'js-cookie';
 import challenges from '../../challenges.json';
 import { LevelUpModal } from '../components/LevelUpModal';
-import { Themes } from '../Utils/Themes'
 
 interface Challenge {
   type: 'body' | 'eye';
@@ -20,17 +19,14 @@ interface ChallengesContextData {
   startNewChallenge: () => void;
   resetChallenge: () => void;
   completeChallenge: () => void;
-  closeLevelUpModal: () => void;
-  handleChangeTheme: () => void;
-  themeName: string;
+  closeLevelUpModal: () => void; 
 }
 
 interface ChallengesProviderProps {
   children: ReactNode;
   level: number;
   currentExperience: number;
-  challengesCompleted: number;
-  themeName: string;
+  challengesCompleted: number;  
 }
 
 export const ChallengesContext = createContext({} as ChallengesContextData);
@@ -46,9 +42,6 @@ export function ChallengesProvider({
   const [activeChallenge, setActiveChallenge] = useState(null);
   const [isLevelUpModalOpen, setIsLevelUpModalOpen] = useState(false);
 
-  const [themeName, setThemeName] = useState(rest.themeName);
-  const [theme, setTheme] = useState(Themes[themeName === "light" ? 0 : 1]);
-
   const experienceToNextLevel = Math.pow((level + 1) * 4, 2);
 
   useEffect(() => {
@@ -59,28 +52,7 @@ export function ChallengesProvider({
     Cookies.set('level', String(level));
     Cookies.set('currentExperience', String(currentExperience));
     Cookies.set('challengesCompleted', String(challengesCompleted));
-    Cookies.set('themeName', String(themeName));
-  }, [level, currentExperience, challengesCompleted, themeName]);
-
-  function handleChangeTheme() {
-    if (theme === Themes[0]) {
-      setTheme(Themes[1]);
-      setThemeName("dark");
-    } else {
-      setTheme(Themes[0]);
-      setThemeName("light");
-    }
-  }
-
-  function setCSSVariables(theme: { [x: string]: string }) {
-    for (const value in theme) {
-      document.documentElement.style.setProperty(`--${value}`, theme[value])
-    }
-  }
-
-  useEffect(() => {
-    setCSSVariables(theme)
-  }, [theme])
+  }, [level, currentExperience, challengesCompleted]); 
 
   function levelUp() {
     setLevel(level + 1);
@@ -142,8 +114,6 @@ export function ChallengesProvider({
         experienceToNextLevel,
         completeChallenge,
         closeLevelUpModal,
-        handleChangeTheme,
-        themeName,
       }}>
       {children}
       {isLevelUpModalOpen && <LevelUpModal />}
