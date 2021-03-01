@@ -23,8 +23,8 @@ export function ThemeProvider({
   const [theme, setTheme] = useState(Themes[themeName === "light" ? 0 : 1]);
 
   useEffect(() => {
-    Cookies.set('themeName', String(themeName))
-  }, [themeName])
+    Cookies.set('themeName', String(themeName));
+  }, [themeName]);
 
   function handleChangeTheme() {
     if (theme === Themes[0]) {
