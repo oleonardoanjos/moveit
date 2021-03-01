@@ -1,4 +1,4 @@
-.container {
+.homeContainer {
   height: 100vh;
   max-width: 992px;
   margin: 0 auto;
@@ -8,7 +8,7 @@
   flex-direction: column;
 }
 
-.container section {
+.homeContainer section {
   flex: 1;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -17,7 +17,7 @@
 }
 
 @media(max-width: 720px){
-  .container section {
+  .homeContainer section {
     flex: 1;
     margin-top: 40px;
     display: flex;

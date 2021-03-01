@@ -1,10 +1,10 @@
 .loginFormContainer {
   height: 100vh;
   max-width: 992px;
-  margin: 0 auto;
-
+  margin: 0;
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
 }
 
 .loginFormContainer section {
@@ -22,4 +22,64 @@
     display: flex;
     flex-direction: column;
   }
+}
+
+.loginFormContainer section {
+  margin-top: 70px;
+  background: var(--blue);
+}
+
+.loginFormContainer section div:first-child img {
+  height: 80vh;
+  
+}
+
+.loginFormContainer section div:last-child div {
+  flex: 1;
+  margin-top: 20px;
+  display: flex;
+  gap: 1rem;
+  grid-template-columns: repeat(2, 1fr);
+  align-items: center;
+}
+
+.loginFormContainer h1 {
+  color: var(--white);
+  margin-top: 40px;
+  text-align: center;
+}
+
+.loginFormContainer p {
+  color: var(--text-highlight);
+}
+
+.loginFormContainer form {
+  text-align: center;
+}
+
+.loginFormContainer form input {
+  max-width: 300px;
+  margin-top: 30px;
+  background:linear-gradient(90deg, rgba(73, 83, 184, 1), 
+  rgba(73, 83, 184, 0.4));
+  border: 0;
+  border-radius: 5px 0 0 5px;
+  padding: 15px 15px;
+  font-size: 1.25rem;
+  color: var(--text-highlight);
+}
+
+.loginFormContainer form button {
+  max-width: 80px;
+  background: var(--blue-dark);
+  border: 0;
+  border-radius: 0 5px 5px 0;
+  color: var(--purple-light);
+  padding: 15px 15px;
+  font-size: 1.25rem;
+}
+
+.activeButton {
+  color: var(--white) !important;
+  background: var(--green) !important;
 }

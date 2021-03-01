@@ -15,7 +15,7 @@ export function LoginForm() {
           <img src="/simbolo.svg" alt="Simbolo"/>
         </div>
         <div>
-          <img src="/logo-full.svg" alt="Logo"/>
+          <img src="/logo-white.svg" alt="Logo"/>
           <h1>Bem-vindo</h1>
 
           <div className={styles.description}>
@@ -23,7 +23,7 @@ export function LoginForm() {
             <p>Faça login com seu Github para começar</p>
           </div> 
 
-          <form onSubmit={(e) => e.preventDefault()}>
+          <form>
             <input
               name="username"
               onChange={(e) => setUser(e.target.value)}
@@ -31,8 +31,9 @@ export function LoginForm() {
               value={user}
             />
             <button
-              type="submit"
+              type="button"
               disabled={user.length === 0}
+              className={user.length > 0 ? styles.activeButton : null}
               onClick={() => handleLoginGithub(user)}
             >                     
               {error ? error : <AiOutlineArrowRight />}

@@ -25,20 +25,21 @@ export function LoginProvider({
   children,
   ...rest
 }: LoginProviderProps) {
-  const [logged, setLogged] = useState(rest.logged ?? false);
-  const [username, setUsername] = useState(rest.username ?? '');
-  const [name, setName] = useState(rest.name ?? '');
-  const [error, setError] = useState(rest.error ?? '');
+  const [logged, setLogged] = useState(rest.logged);
+  const [username, setUsername] = useState(rest.username);
+  const [name, setName] = useState(rest.name);
+  const [error, setError] = useState(rest.error);
 
   const router = useRouter();
 
   useEffect(() => {
-    console.log(username + ' teste');
-    Cookies.set('logged', String(logged));
-    Cookies.set('username', String(username));
-    Cookies.set('name', String(name));
-    Cookies.set('error', String(error));
-  }, [logged, username, name, error]);
+    if(username !== ''){
+      Cookies.set('logged', String(logged));
+      Cookies.set('username', String(username));
+      Cookies.set('name', String(name));
+      Cookies.set('error', String(error));
+    }
+  }, [logged]);
 
   async function handleLoginGithub(user: string) {
     if (user) {
@@ -50,7 +51,7 @@ export function LoginProvider({
           setUsername(user);
           setName(res.data.name ?? res.data.login);
           setLogged(true);
-          router.push('/home');
+          router.reload()
         }
       } catch(error) {
         setError('Username invalido');
